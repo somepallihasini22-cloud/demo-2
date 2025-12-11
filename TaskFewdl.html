@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ShopNest - Modern E-commerce</title>
+
+    <style>
+        /* ---------- GLOBAL THEME ---------- */
+        :root {
+            --yellow: #ffcc33;
+            --orange: #ff7b00;
+            --teal: #1fbabf;
+            --dark: #222;
+            --light: #fff;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #fafafa;
+        }
+
+        /* ---------- NAVBAR ---------- */
+        nav {
+            background: var(--orange);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--light);
+        }
+
+        nav .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        nav input {
+            padding: 8px 12px;
+            border-radius: 5px;
+            border: none;
+            width: 250px;
+        }
+
+        /* ---------- HERO / BANNER ---------- */
+        .banner {
+            background: linear-gradient(45deg, var(--yellow), var(--teal));
+            color: var(--dark);
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .banner h1 {
+            margin: 0;
+            font-size: 40px;
+        }
+
+        /* ---------- PRODUCT GRID ---------- */
+        .products-section {
+            padding: 30px;
+        }
+
+        .products-title {
+            font-size: 26px;
+            margin-bottom: 15px;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .product-card {
+            background: var(--light);
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+            transition: 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-6px);
+        }
+
+        .product-card img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .product-name {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        .product-price {
+            color: var(--orange);
+            font-weight: bold;
+        }
+
+        /* ---------- FOOTER ---------- */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: var(--teal);
+            margin-top: 40px;
+            color: var(--light);
+        }
+    </style>
+
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav>
+        <div class="logo">ShopNest</div>
+        <input type="text" id="search" placeholder="Search products...">
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="banner">
+        <h1>Welcome to ShopNest</h1>
+        <p>Your modern, vibrant shopping experience</p>
+    </section>
+
+    <!-- PRODUCTS -->
+    <section class="products-section">
+        <div class="products-title">Featured Products</div>
+
+        <div class="products-grid" id="productList">
+            <!-- JS renders products here -->
+        </div>
+    </section>
+
+    <footer>© 2025 ShopNest. All rights reserved.</footer>
+
+    <script>
+        /* ---------- SIMPLE PRODUCT DATA ---------- */
+        const products = [
+            { name: "Wireless Headphones", price: "₹1499", img: "https://via.placeholder.com/250x180" },
+            { name: "Sports Sneakers", price: "₹1999", img: "https://via.placeholder.com/250x180" },
+            { name: "Smartwatch Pro", price: "₹2499", img: "https://via.placeholder.com/250x180" },
+            { name: "Backpack Urban", price: "₹899", img: "https://via.placeholder.com/250x180" },
+        ];
+
+        const container = document.getElementById("productList");
+
+        function renderProducts(items) {
+            container.innerHTML = "";
+            items.forEach(p => {
+                container.innerHTML += `
+                    <div class="product-card">
+                        <img src="${p.img}" alt="">
+                        <div class="product-name">${p.name}</div>
+                        <div class="product-price">${p.price}</div>
+                    </div>
+                `;
+            });
+        }
+
+        renderProducts(products);
+
+        /* ---------- SEARCH FUNCTIONALITY ---------- */
+        document.getElementById("search").addEventListener("input", function() {
+            const keyword = this.value.toLowerCase();
+            const filtered = products.filter(p => p.name.toLowerCase().includes(keyword));
+            renderProducts(filtered);
+        });
+    </script>
+
+</body>
+</html>
